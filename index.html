@@ -1,15 +1,27 @@
 <!doctype html>
-<html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Promise-based script loading example</title>
 		<script>
-			if (performance && performance.now) {
-				console.log('executing first script at ' + parseInt(performance.now()) + ' milliseconds');
-			}
 			// Required reading: http://www.html5rocks.com/en/tutorials/speed/script-loading/
+
+			function log(msg) {
+				// Ensure we don't get errors in earlier versions of IE
+				if (!document.querySelectorAll('.ie6, .ie7, .ie8').length) {
+					if (performance && performance.now) {
+						console.log(msg +  ' at ' + parseInt(performance.now()) + ' milliseconds');
+					}
+				}
+			}
+
+			log('executing first script');
 
 			/*! promise-polyfill 2.1.0 */
 			/* https://github.com/taylorhakes/promise-polyfill
@@ -66,9 +78,8 @@
 						}
 
 						// Add the script to the page
-						if (performance && performance.now) {
-							console.log('adding script to page at ' + parseInt(performance.now()) + ' milliseconds');
-						}
+						log('adding script to page');
+
 						var ref = window.document.getElementsByTagName( "script" )[ 0 ];
 						ref.parentNode.insertBefore( script, ref );
 					});

@@ -34,3 +34,7 @@ For our purposes, we only need basic `window.Promise` support, and can live with
 What we're trying to accomplish here is script-loading that will work across a wide range of browsers, but which is also fast and relatively lightweight.
 
 Because we may need certain polyfills, we have to load these before our main bundle of dependencies &#8212; `window.Promise.all` comes in very handy here.
+
+# Status
+
+The script works on browers back to IE8. In IE8 the jQuery promise works, but the promise.all doesn't fire -- further investigation needed.
